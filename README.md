@@ -51,3 +51,8 @@ Link the configuration files:
 ``` shell
 ./link.sh
 ```
+
+## Links
+
+- <https://github.com/sammcj/sync-agentic-tools/>
+- <https://github.com/karanb192/claude-code-hooks>
