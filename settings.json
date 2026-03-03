@@ -1,13 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "enabledPlugins": {
-    "claude-md-management@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true,
-    "swift-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
-  },
   "env": {
     "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "1",
     "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
@@ -15,29 +7,6 @@
     "DISABLE_TELEMETRY": "1",
     "ENABLE_LSP_TOOL": "1"
   },
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ~/.claude/hooks/pre-tool-use/block-dangerous-commands.js"
-          }
-        ]
-      },
-      {
-        "matcher": "Read|Edit|Write|Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ~/.claude/hooks/pre-tool-use/protect-secrets.js"
-          }
-        ]
-      }
-    ]
-  },
-  "language": "British English",
   "permissions": {
     "allow": [
       "Bash(actionlint:*)",
@@ -157,62 +126,6 @@
       "WebFetch",
       "WebSearch"
     ],
-    "ask": [
-      "Edit(~/.claude/commands/**)",
-      "Edit(~/.claude/hooks/**)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(gh add:*)",
-      "Bash(gh commit:*)",
-      "Bash(nc:*)",
-      "Bash(ssh:*)",
-      "Bash(rsync:*)",
-      "Bash(scp:*)",
-      "Bash(tcpdump:*)",
-      "Bash(wireshark:*)",
-      "Bash(npx -y:*)",
-      "Bash(uvx:*)",
-      "Bash(go run:*)",
-      "Bash(env)",
-      "Bash(printenv:*)",
-      "Bash(pipx:*)",
-      "Bash(./target/**:*)",
-      "Bash(./bin/**:*)",
-      "Bash(./build/**:*)",
-      "Bash(./out/**:*)",
-      "Edit(./**/*.bak)",
-      "Edit(./**/*.backup)",
-      "Read(**/credentials.json)",
-      "Read(**/.env)",
-      "Read(**/*.pem)",
-      "Read(**/*.sock)",
-      "Read(**/*.socket)",
-      "Read(~/Library/com.apple**)",
-      "Read(~/Library/**/com.apple**)",
-      "Read(//Library/**)",
-      "Read(/System/**)",
-      "Bash(rm -rf:*)",
-      "Bash(rm -fr:*)",
-      "Bash(rm -r -f:*)",
-      "Bash(rm -f -r:*)",
-      "Bash(yes | rm:*)",
-      "Bash(yes |rm:*)",
-      "Bash(yes| rm:*)",
-      "Bash(yes|rm:*)",
-      "Bash(echo y |:*)",
-      "Bash(echo y|:*)",
-      "Bash(echo yes |:*)",
-      "Bash(echo yes|:*)",
-      "Bash(dd:*)",
-      "Bash(mkfs:*)",
-      "Bash(fdisk:*)",
-      "Bash(diskutil:*)",
-      "Bash(parted:*)",
-      "Bash(history -c:*)",
-      "Bash(unset HISTFILE:*)",
-      "Bash(chmod -R:*)",
-      "Bash(chown -R:*)"
-    ],
     "deny": [
       "Bash(//usr/bin/sudo:*)",
       "Bash(//usr/libexec/security_authtrampoline:*)",
@@ -280,16 +193,101 @@
       "Read(~/.claude/settings.json)",
       "Read(~/.ssh/**)",
       "Read(~/Library/Keychains/**)"
+    ],
+    "ask": [
+      "Edit(~/.claude/commands/**)",
+      "Edit(~/.claude/hooks/**)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(gh add:*)",
+      "Bash(gh commit:*)",
+      "Bash(nc:*)",
+      "Bash(ssh:*)",
+      "Bash(rsync:*)",
+      "Bash(scp:*)",
+      "Bash(tcpdump:*)",
+      "Bash(wireshark:*)",
+      "Bash(npx -y:*)",
+      "Bash(uvx:*)",
+      "Bash(go run:*)",
+      "Bash(env)",
+      "Bash(printenv:*)",
+      "Bash(pipx:*)",
+      "Bash(./target/**:*)",
+      "Bash(./bin/**:*)",
+      "Bash(./build/**:*)",
+      "Bash(./out/**:*)",
+      "Edit(./**/*.bak)",
+      "Edit(./**/*.backup)",
+      "Read(**/credentials.json)",
+      "Read(**/.env)",
+      "Read(**/*.pem)",
+      "Read(**/*.sock)",
+      "Read(**/*.socket)",
+      "Read(~/Library/com.apple**)",
+      "Read(~/Library/**/com.apple**)",
+      "Read(//Library/**)",
+      "Read(/System/**)",
+      "Bash(rm -rf:*)",
+      "Bash(rm -fr:*)",
+      "Bash(rm -r -f:*)",
+      "Bash(rm -f -r:*)",
+      "Bash(yes | rm:*)",
+      "Bash(yes |rm:*)",
+      "Bash(yes| rm:*)",
+      "Bash(yes|rm:*)",
+      "Bash(echo y |:*)",
+      "Bash(echo y|:*)",
+      "Bash(echo yes |:*)",
+      "Bash(echo yes|:*)",
+      "Bash(dd:*)",
+      "Bash(mkfs:*)",
+      "Bash(fdisk:*)",
+      "Bash(diskutil:*)",
+      "Bash(parted:*)",
+      "Bash(history -c:*)",
+      "Bash(unset HISTFILE:*)",
+      "Bash(chmod -R:*)",
+      "Bash(chown -R:*)"
     ]
   },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/hooks/pre-tool-use/block-dangerous-commands.js"
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Edit|Write|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/hooks/pre-tool-use/protect-secrets.js"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "claude-md-management@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "language": "British English",
   "sandbox": {
-    "autoAllowBashIfSandboxed": true,
     "enabled": true,
-    "filesystem": {
-      "allowWrite": [
-        "~/tmp"
-      ]
-    },
+    "autoAllowBashIfSandboxed": true,
     "network": {
       "allowedDomains": [
         "*.anthropic.com",
@@ -319,6 +317,11 @@
         "swift.org"
       ],
       "allowLocalBinding": true
+    },
+    "filesystem": {
+      "allowWrite": [
+        "~/tmp"
+      ]
     }
   },
   "spinnerVerbs": {
