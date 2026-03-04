@@ -142,8 +142,8 @@ After implementing a list of changes, perform a critical self-review pass before
 
 ## Rules
 
-**Before declaring any task complete, verify**: linting passes, code builds, all tests pass (new + existing), no debug statements remain, error handling in place.
-
+- Before declaring any task complete, verify: linting passes, code builds, all tests pass (new + existing), no debug statements remain, error handling in place.
+- Never install or uninstall something with homebrew
 - Never perform git add/commit/push operations
 - Never hardcode credentials or connection strings
 - Never add process comments ("improved function", "optimised version", "# FIX:")
@@ -151,5 +151,4 @@ After implementing a list of changes, perform a critical self-review pass before
 - Never build or develop for Windows unless explicitly instructed
 - Edit only what's necessary - make precise, minimal changes unless instructed otherwise
 - Implement requirements in full or discuss with the user why you can't - don't defer work
-- Never install or uninstall something with homebrew
 - Read CONTRIBUTING.md before contributing to any project; match existing code style, no placeholder comments
