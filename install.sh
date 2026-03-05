@@ -35,7 +35,7 @@ claude plugin install typescript-lsp
 # Add MCP servers
 echo "claude MCP servers..."
 claude mcp add --transport http --scope user excalidraw https://mcp.excalidraw.com
-claude mcp add --transport stdio --scope user mcp-devtools --env ENABLE_ADDITIONAL_TOOLS="aws_documentation,code_skim,excel,murican_to_english,process_document,terraform_documentation" -- $HOME/go/bin/mcp-devtools
+claude mcp add --transport stdio --scope user mcp-devtools --env ENABLE_ADDITIONAL_TOOLS="aws_documentation,code_skim,murican_to_english,process_document,terraform_documentation" -- "$HOME/go/bin/mcp-devtools"
 
 # TODO: validate
 # Context management: https://github.com/mksglu/claude-context-mode

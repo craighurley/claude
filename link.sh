@@ -12,6 +12,7 @@ ln -sF "$repo_dir/agents" ~/.claude/agents
 ln -sF "$repo_dir/commands" ~/.claude/commands
 ln -sF "$repo_dir/hooks" ~/.claude/hooks
 ln -sF "$repo_dir/rules" ~/.claude/rules
+ln -sF "$repo_dir/scripts" ~/.claude/scripts
 ln -sF "$repo_dir/skills" ~/.claude/skills
 ln -sF "$repo_dir/CLAUDE.md" ~/.claude/CLAUDE.md
 ln -sF "$repo_dir/settings.json" ~/.claude/settings.json

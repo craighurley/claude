@@ -273,6 +273,10 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/scripts/statusline-command.sh"
+  },
   "enabledPlugins": {
     "claude-md-management@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
@@ -322,7 +326,14 @@
       "allowWrite": [
         "~/tmp"
       ]
-    }
+    },
+    "excludedCommands": [
+      "docker",
+      "go mod tidy",
+      "go mod vendor",
+      "gh",
+      "uv run"
+    ]
   },
   "spinnerVerbs": {
     "mode": "replace",
