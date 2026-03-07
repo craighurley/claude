@@ -4,23 +4,31 @@ set -euo pipefail
 # Read all of stdin into a variable
 input=$(cat)
 
-# Extract fields with jq, "// 0" provides fallback for null
-model=$(echo "$input" | jq -r '.model.display_name')
-pct=$(echo "$input" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
-dir=$(echo "$input" | jq -r '.workspace.current_dir')
-
 green=$'\033[0;32m'
 orange=$'\033[38;5;208m'
+red=$'\033[0;31m'
 bright_white=$'\033[1;97m'
 reset=$'\033[0m'
 
-model="${orange}${model}${reset}"
+# Extract fields with jq, "// 0" provides fallback for null
+model="${orange}$(echo "$input" | jq -r '.model.display_name')${reset}"
+pct=$(echo "$input" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
+dir=$(echo "$input" | jq -r '.workspace.current_dir')
 dir="${bright_white}${dir/#$HOME/\~}${reset}"
 
 if git rev-parse --git-dir > /dev/null 2>&1; then
-    branch="${green}$(git branch --show-current 2>/dev/null)${reset} |"
+    git_info="${green}$(git branch --show-current 2>/dev/null)${reset} "
+
+    modified=$(git diff --numstat 2>/dev/null | wc -l | tr -d ' ')
+    staged=$(git diff --cached --numstat 2>/dev/null | wc -l | tr -d ' ')
+    untracked=$(git ls-files --others --exclude-standard 2>/dev/null | wc -l | tr -d ' ')
+
+    [ "$modified" -gt 0 ] && git_info="${git_info}${red}*${reset}"
+    [ "$staged" -gt 0 ] && git_info="${git_info}${red}+${reset}"
+    [ "$untracked" -gt 0 ] && git_info="${git_info}${red}?${reset}"
+    git_info="${git_info} | "
 else
-    branch=""
+    git_info=""
 fi
 
-echo "$model | $pct% | $branch $dir"
+echo "$model | $pct% | $git_info$dir"
