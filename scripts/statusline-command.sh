@@ -7,6 +7,7 @@ input=$(cat)
 green=$'\033[0;32m'
 orange=$'\033[38;5;208m'
 red=$'\033[0;31m'
+white=$'\033[0;97m'
 bright_white=$'\033[1;97m'
 reset=$'\033[0m'
 
@@ -19,13 +20,21 @@ dir="${bright_white}${dir/#$HOME/\~}${reset}"
 if git rev-parse --git-dir > /dev/null 2>&1; then
     git_info="${green}$(git branch --show-current 2>/dev/null)${reset} "
 
-    modified=$(git diff --numstat 2>/dev/null | wc -l | tr -d ' ')
+    deleted=$(git ls-files --deleted 2>/dev/null | wc -l | tr -d ' ')
+    modified=$(git diff --diff-filter=M --numstat 2>/dev/null | wc -l | tr -d ' ')
     staged=$(git diff --cached --numstat 2>/dev/null | wc -l | tr -d ' ')
     untracked=$(git ls-files --others --exclude-standard 2>/dev/null | wc -l | tr -d ' ')
+    ahead=$(git rev-list --count "@{u}..HEAD" 2>/dev/null || echo 0)
+    behind=$(git rev-list --count "HEAD..@{u}" 2>/dev/null || echo 0)
 
+    [ "$deleted" -gt 0 ] && git_info="${git_info}${red}x${reset}"
     [ "$modified" -gt 0 ] && git_info="${git_info}${red}*${reset}"
     [ "$staged" -gt 0 ] && git_info="${git_info}${red}+${reset}"
     [ "$untracked" -gt 0 ] && git_info="${git_info}${red}?${reset}"
+    [ "$ahead" -gt 0 ] && git_info="${git_info}${red}⇡${reset}"
+    [ "$behind" -gt 0 ] && git_info="${git_info}${red}⇣${reset}"
+    [ "$ahead" -eq 0 ] && [ "$behind" -eq 0 ] && git_info="${git_info}${white}=${reset}"
+
     git_info="${git_info} | "
 else
     git_info=""
