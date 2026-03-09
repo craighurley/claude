@@ -24,6 +24,7 @@ if git rev-parse --git-dir > /dev/null 2>&1; then
     modified=$(git diff --diff-filter=M --numstat 2>/dev/null | wc -l | tr -d ' ')
     staged=$(git diff --cached --numstat 2>/dev/null | wc -l | tr -d ' ')
     untracked=$(git ls-files --others --exclude-standard 2>/dev/null | wc -l | tr -d ' ')
+    upstream=$(git rev-parse --abbrev-ref "@{u}" 2>/dev/null || echo "")
     ahead=$(git rev-list --count "@{u}..HEAD" 2>/dev/null || echo 0)
     behind=$(git rev-list --count "HEAD..@{u}" 2>/dev/null || echo 0)
 
@@ -33,7 +34,7 @@ if git rev-parse --git-dir > /dev/null 2>&1; then
     [ "$untracked" -gt 0 ] && git_info="${git_info}${red}?${reset}"
     [ "$ahead" -gt 0 ] && git_info="${git_info}${red}⇡${reset}"
     [ "$behind" -gt 0 ] && git_info="${git_info}${red}⇣${reset}"
-    [ "$ahead" -eq 0 ] && [ "$behind" -eq 0 ] && git_info="${git_info}${white}=${reset}"
+    [ -n "$upstream" ] && [ "$ahead" -eq 0 ] && [ "$behind" -eq 0 ] && git_info="${git_info}${white}=${reset}"
 
     git_info="${git_info} | "
 else
