@@ -9,7 +9,7 @@
 
 ## Spelling
 
-**Always use British English spelling and grammar in all responses, documentation and comments.**
+- Always use British English spelling and grammar in all responses, documentation and comments
 
 ## Documentation
 
