@@ -28,7 +28,7 @@
 - Follow SOLID principles - small interfaces, composition, depend on abstractions
 - Reuse and align with existing components, utilities, and logic where possible
 - Use appropriate design patterns (repository, DI, circuit breaker, strategy, observer, factory) based on context
-- If a Makefile or Taskfile is not present, provide a single Makefile entrypoint to lint, test, version, build and run
+- If a Makefile is not present, provide a single Makefile entrypoint to lint, test, version, build and run
 
 ### Code Quality
 
@@ -94,7 +94,7 @@ If `run_silent` is available (check with `which run_silent`), use it to reduce t
 - Wrap bash/CLI commands with `run_silent` unless you need to see all the stdout
 - Good commands to prefix: package installs, builds, tests, linting
 - Examples:
-    - `run_silent pip install`
+    - `run_silent uv pip install`
     - `run_silent make lint`
     - `run_silent task test`
 
@@ -144,6 +144,7 @@ After implementing a list of changes, perform a critical self-review pass before
 
 - Before declaring any task complete, verify: linting passes, code builds, all tests pass (new + existing), no debug statements remain, error handling in place.
 - Never install or uninstall something with homebrew
+- Never install or uninstall something with pip, unless the command is prefixed with uv, e.g. `uv pip install`
 - Never perform git add/commit/push operations
 - Never hardcode credentials or connection strings
 - Never add process comments ("improved function", "optimised version", "# FIX:")
