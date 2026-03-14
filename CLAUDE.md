@@ -3,8 +3,9 @@
 ## Writing & Communication Style
 
 - Never use overused AI phrases: comprehensive, robust, best-in-class, feature-rich, production-ready, enterprise-grade, seamlessly
-- No smart quotes, em dashes, double dashes or emojis unless requested
 - No sycophancy, marketing speak, or unnecessary summary paragraphs
+- Do not use en-dashes, em-dashes, double dashes (--), smart quotes or other "smart" formatting
+- Avoid emojis unless requested
 - Be direct, concise and specific. If a sentence adds no value, delete it
 
 ## Spelling
@@ -122,7 +123,7 @@ If `run_silent` is available (check with `which run_silent`), use it to reduce t
 
 - Use relevant skills to extend capabilities
 - Use tasks/TODOs to track work in progress. When working from a dev plan, keep tasks and plan in sync
-- Do not include line numbers when referencing files in CLAUDE.md
+- Do not include line numbers when referencing files in CLAUDE.md or documentation
 
 #### Sub-agent Coordination
 
@@ -152,4 +153,4 @@ After implementing a list of changes, perform a critical self-review pass before
 - Never build or develop for Windows unless explicitly instructed
 - Edit only what's necessary - make precise, minimal changes unless instructed otherwise
 - Implement requirements in full or discuss with the user why you can't - don't defer work
-- Read CONTRIBUTING.md before contributing to any project; match existing code style, no placeholder comments
+- If CONTRIBUTING.md exists, read if before contributing to any project
